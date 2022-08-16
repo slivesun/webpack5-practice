@@ -4,18 +4,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     mode: 'development',
     entry: { //可以实现分包（代码分离，但是比较繁琐复杂重复模块会重复打包）
-        //   index: './src/index.js',
+          index: './src/index.js',
         //   another: './src/another-module.js',
         //   print: './src/print.js',
-        index: {
-            import: './src/index.js',
-            dependOn: 'shared',
-        },
-        another: {
-            import: './src/another-module.js',
-            dependOn: 'shared',
-        },
-        shared: 'lodash',
+        // index: {
+        //     import: './src/index.js',
+        //     dependOn: 'shared',
+        // },
+        // another: {
+        //     import: './src/another-module.js',
+        //     dependOn: 'shared',
+        // },
+        // shared: 'lodash',
     },
     // devtool: 'source-map', //控制台打印报错，生产环境不要用属于开发工具,会生成js.map文件
     output: {
@@ -26,21 +26,21 @@ module.exports = {
         clean: true, //清除打包文件重新打包
         publicPath: '/', //公共路径
     },
-    module: {
-        rules: [{
-                test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
-            },
-            {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                type: 'asset/resource',
-            },
-        ]
-    },
+    // module: {
+    //     rules: [{
+    //             test: /\.css$/i,
+    //             use: ['style-loader', 'css-loader'],
+    //         },
+    //         {
+    //             test: /\.(png|svg|jpg|jpeg|gif)$/i,
+    //             type: 'asset/resource',
+    //         },
+    //         {
+    //             test: /\.(woff|woff2|eot|ttf|otf)$/i,
+    //             type: 'asset/resource',
+    //         },
+    //     ]
+    // },
     plugins: [
         // new webpack.ProgressPlugin(),
         new HtmlWebpackPlugin({
@@ -87,12 +87,12 @@ module.exports = {
     // optimization: {
     //     runtimeChunk: 'single',
     // },
-    optimization: { //代码分离将重复模块抽离不在重复打包
-        splitChunks: {
-            // chunks：async：chunks的默认值，提取异步加载的模块，打包成单独文件。
-            // chunks：initial：提取异步和同步加载的模块(普通import不属于同步也不属于异步)，打包成单独文件，就算这个文件被同步引入了，也被异步引入了，也会打包成两个文件。
-            // chunks：all: 提取异步和同步加载的模块，就算这个文件被同步引入了，也被异步引入了，也会打包成一个文件。
-            chunks: 'all',
-        },
-    },
+    // optimization: { //代码分离将重复模块抽离不在重复打包
+    //     splitChunks: {
+    //         // chunks：async：chunks的默认值，提取异步加载的模块，打包成单独文件。
+    //         // chunks：initial：提取异步和同步加载的模块(普通import不属于同步也不属于异步)，打包成单独文件，就算这个文件被同步引入了，也被异步引入了，也会打包成两个文件。
+    //         // chunks：all: 提取异步和同步加载的模块，就算这个文件被同步引入了，也被异步引入了，也会打包成一个文件。
+    //         chunks: 'all',
+    //     },
+    // },
 }
