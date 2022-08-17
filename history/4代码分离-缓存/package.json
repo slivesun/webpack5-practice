@@ -4,14 +4,10 @@
   "description": "",
   "private": true,
   "scripts": {
-    "dev": "webpack serve  --env mode=development",
-    "build-dev": "webpack --config webpack.config.js --env mode=development",
-    "build-test": "webpack --config webpack.config.js --env mode=production",
-    "build-production": "webpack --config webpack.config.js --env mode=production",
-    "analz": "webpack serve --env mode=development --env analz",
+    "dev": "webpack serve",
+    "build": "webpack --config webpack.config.js",
     "watch": "webpack --watch",
-    "server": "node server.js",
-    "build-other": "webpack serve --config webpack.config.test.js"
+    "server": "node server.js"
   },
   "keywords": [],
   "author": "",
