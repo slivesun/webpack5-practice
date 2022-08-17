@@ -7,11 +7,12 @@
   "description": "",
   "private": true,
   "scripts": { //配置webpack执行命令
-    "dev": "webpack --config webpack.config.js",
-    "build": "webpack",
+    "dev": "webpack serve --env mode=development  --progress=profile",//本地启动命令  --env webpack变量需要 webpack 写成导出函数 形参接收  --progress :webpack 的编译进度.  --progress=profile收集编译过程中每一步的 profile 数据
+    "build-dev": "webpack --config webpack.config.js --env mode=development",//打包开发环境包
+    "build-test": "webpack --config webpack.config.js --env mode=production",//打包生产环境包
     "watch": "webpack --watch",//自动编辑监听，不可自动刷新页面
     "start": "webpack serve --open",//devServe插件启动命令 --open 为自动打开
-    "server": "node server.js",//执行server文件，以node服务形式启动项目
+    "server": "node server.js",//执行server文件，以node服务形式启动项目,相当于服务端启动
   },
   "keywords": [],
   "author": "",

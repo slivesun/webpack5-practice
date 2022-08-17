@@ -4,8 +4,11 @@
   "description": "",
   "private": true,
   "scripts": {
-    "dev": "webpack serve",
-    "build": "webpack --config webpack.config.js",
+    "dev": "webpack serve  --env mode=development",
+    "build-dev": "webpack --config webpack.config.js --env mode=development",
+    "build-test": "webpack --config webpack.config.js --env mode=production",
+    "build-production": "webpack --config webpack.config.js --env mode=production",
+    "analz": "webpack serve --env mode=development --env analz",
     "watch": "webpack --watch",
     "server": "node server.js"
   },
