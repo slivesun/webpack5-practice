@@ -6,7 +6,7 @@ import {
 } from './math.js';
 
 function component() {
-    console.log(process.env.NODE_ENV,'dsadsd')
+    // console.log(process.env.NODE_ENV,'dsadsd')
     const element = document.createElement('pre');
     element.innerHTML = [
         'Hello webpack!',
