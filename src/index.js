@@ -1,15 +1,25 @@
 import _ from 'lodash';
 import printMe from './print.js';
 import './style.css'
+import {
+    cube
+} from './math.js';
 
 function component() {
-    const element = document.createElement('div');
-    element.classList.add('hello');
-    const btn = document.createElement('button');
-    element.innerHTML = _.join(['dsd', 'webpack'], ' ');
-    btn.innerHTML = 'Click me and check the console!';
-    btn.onclick = printMe.bind(null, 'asdasd');
-    element.appendChild(btn);
+    console.log(process.env.NODE_ENV,'dsadsd')
+    const element = document.createElement('pre');
+    element.innerHTML = [
+        'Hello webpack!',
+        '5 cubed is equal to ' + cube(5)
+    ].join('\n\n');
+
+    // const element = document.createElement('div');
+    // element.classList.add('hello');
+    // const btn = document.createElement('button');
+    // element.innerHTML = _.join(['dsd', 'webpack'], ' ');
+    // btn.innerHTML = 'Click me and check the console!';
+    // btn.onclick = printMe.bind(null, 'asdasd');
+    // element.appendChild(btn);
     // console.log(a)
     return element;
 }

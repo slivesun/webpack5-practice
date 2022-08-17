@@ -10,7 +10,8 @@
     "build-production": "webpack --config webpack.config.js --env mode=production",
     "analz": "webpack serve --env mode=development --env analz",
     "watch": "webpack --watch",
-    "server": "node server.js"
+    "server": "node server.js",
+    "build-other": "webpack serve --config webpack.config.test.js"
   },
   "keywords": [],
   "author": "",
