@@ -10,7 +10,8 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
     let ObjConfig = {
         mode: env.mode, //模式  production 生产   development 开发
         entry: { //可以实现分包（代码分离，但是比较繁琐复杂重复模块会重复打包）
-            index: './src/index.js',
+            index: './src/index.ts',
+            // index: './src/index.js',
             //   another: './src/another-module.js',
             //   print: './src/print.js',
             // index: {
@@ -34,25 +35,30 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             clean: true, //清除打包文件重新打包
             publicPath: '/', //公共路径
         },
-        resolve:{
-
+        resolve: {
+            extensions: ['.tsx', '.ts', '.js'],
         },
         module: {
             rules: [{
                     test: /\.css$/i,
-                    type:'asset/resource',
+                    type: 'asset/resource',
                     use: ['style-loader', 'css-loader'],
-                    include: path.resolve(__dirname, 'src'),//性能优化，将loader 只应用在src中
+                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
                 },
                 {
                     test: /\.(png|svg|jpg|jpeg|gif)$/i,
                     type: 'asset/resource',
-                    include: path.resolve(__dirname, 'src'),//性能优化，将loader 只应用在src中
+                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
                 },
                 {
                     test: /\.(woff|woff2|eot|ttf|otf)$/i,
                     type: 'asset/resource',
-                    include: path.resolve(__dirname, 'src'),//性能优化，将loader 只应用在src中
+                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                },
+                {
+                    test: /\.tsx?$/,
+                    use: 'ts-loader',
+                    exclude: /node_modules/,
                 },
             ]
         },
@@ -130,6 +136,6 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
     if (env.analz) { //代码分析插件 命令行有  analz 变量 启用分析插件
         ObjConfig.plugins.push(new BundleAnalyzerPlugin())
     }
-    
+
     return ObjConfig
 }
