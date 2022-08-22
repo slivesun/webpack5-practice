@@ -4,6 +4,15 @@ import './style.css'
 import {
     cube
 } from './math.js';
+if ('serviceWorker' in navigator) { // PWA  渐进式网络应用环境判断
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            console.log('SW registered: ', registration);
+        }).catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+        });
+    });
+}
 
 function component() {
     // console.log(process.env.NODE_ENV,'dsadsd')

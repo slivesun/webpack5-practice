@@ -13,6 +13,8 @@
     "watch": "webpack --watch",//自动编辑监听，不可自动刷新页面
     "start": "webpack serve --open",//devServe插件启动命令 --open 为自动打开
     "server": "node server.js",//执行server文件，以node服务形式启动项目,相当于服务端启动
+    "build-other": "webpack serve --config webpack.config.test.js",//启动其它webpack文件
+    "start": "http-server dist",//可以使应用离线使用
   },
   "keywords": [],
   "author": "",

@@ -3,7 +3,9 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const WebpackBar = require('webpackbar')
-
+const WorkboxPlugin = require('workbox-webpack-plugin');
+// 尝试使用环境变量，否则使用根路径
+const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 module.exports = (env) => { //env----package.json 中带的变量，有插件可以代替
     console.log(env, '---------------------evn')
@@ -33,7 +35,7 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             chunkFilename: '[name].js', //非入口文件名称
             path: path.resolve(__dirname, 'dist'), //输出文件名称
             clean: true, //清除打包文件重新打包
-            publicPath: '/', //公共路径
+            publicPath: ASSET_PATH, //公共路径
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
@@ -84,6 +86,15 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             // new webpack.HotModuleReplacementPlugin(),//r热更新插件
             // env.analz ? new BundleAnalyzerPlugin() : null, //代码分析插件
             // new WebpackBar(), //打包进度条插件
+            // new WorkboxPlugin.GenerateSW({//渐进式网络应用程序 在**离线(offline)**时应用程序能够继续运行功能
+            //     // 这些选项帮助快速启用 ServiceWorkers
+            //     // 不允许遗留任何“旧的” ServiceWorkers
+            //     clientsClaim: true,
+            //     skipWaiting: true,
+            // }),
+            // new webpack.DefinePlugin({// 这可以帮助我们在代码中安全地使用环境变量
+            //     'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH),
+            // }),
         ],
         devServer: {
             static: false, //'./dist',//该配置项允许配置从目录提供静态文件的选项（默认是 'public' 文件夹）。将其设置为 false 以禁用

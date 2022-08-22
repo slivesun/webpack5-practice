@@ -5,13 +5,14 @@
   "private": true,
   "scripts": {
     "dev": "webpack serve  --env mode=development",
-    "build-dev": "webpack --config webpack.config.js --env mode=development",
+    "build-dev": "webpack --config webpack.config.js --env mode=development --env ASSET_PATH",
     "build-test": "webpack --config webpack.config.js --env mode=production",
     "build-production": "webpack --config webpack.config.js --env mode=production",
     "analz": "webpack serve --env mode=development --env analz",
     "watch": "webpack --watch",
     "server": "node server.js",
-    "build-other": "webpack serve --config webpack.config.test.js"
+    "build-other": "webpack serve --config webpack.config.test.js",
+    "start": "http-server dist"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "css-loader": "^6.7.1",
     "express": "^4.18.1",
     "html-webpack-plugin": "^5.5.0",
+    "http-server": "^14.1.1",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.3.1",
@@ -30,7 +32,8 @@
     "webpack-cli": "^4.10.0",
     "webpack-dev-middleware": "^5.3.3",
     "webpack-dev-server": "^4.10.0",
-    "webpackbar": "^5.0.2"
+    "webpackbar": "^5.0.2",
+    "workbox-webpack-plugin": "^6.5.4"
   },
   "dependencies": {
     "lodash": "^4.17.21"
