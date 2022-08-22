@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="449px" height="128px" viewBox="0 0 449 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 2</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#990400" offset="0%"></stop>
+            <stop stop-color="#731214" offset="100%"></stop>
+        </linearGradient>
+        <path d="M357.5,78.5 L357.5,127.5 L323.5,127.5 L323.5,78.5 L357.5,78.5 Z M448,0 L448,127 L414,127 L414,76 L376.5,76 L376.5,45.5 L414,45.5 L414,0 L448,0 Z M357.5,0 L357.5,45.5 L323.5,45.5 L323.5,0 L357.5,0 Z" id="path-2"></path>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FBD8A9" offset="0%"></stop>
+            <stop stop-color="#EA6517" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#990400" offset="0%"></stop>
+            <stop stop-color="#731214" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#990400" offset="0%"></stop>
+            <stop stop-color="#731214" offset="100%"></stop>
+        </linearGradient>
+        <path d="M235,0 L236.033552,0.00854067862 C270.074643,0.571503575 297.5,28.8939287 297.5,63.75 C297.5,98.9581528 269.517797,127.5 235,127.5 L235,127.5 L173.5,127.5 L173.5,127.499 L154,127.5 L154,83.64 L188,83.64 L188,120.359 L203.103445,120.36 L203.102659,120.311196 L203.875284,120.338262 C204.391255,120.352723 204.908985,120.36 205.428382,120.36 C236.080185,120.36 256.278508,93.9948397 256.278508,62.73 C256.278508,31.4651603 236.080185,7.14 205.428382,7.14 C204.649287,7.14 203.873942,7.15637433 203.102659,7.188804 L203.102659,7.188804 L203.103445,7.14 L188,7.139 L188,43.86 L154,43.86 L154,0 L235,0 Z" id="path-6"></path>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板" transform="translate(-85.000000, -83.000000)">
+            <g id="编组-2" transform="translate(85.441558, 83.000000)">
+                <g id="形状结合">
+                    <use fill="#D8D8D8" xlink:href="#path-2"></use>
+                    <use fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                </g>
+                <g id="编组">
+                    <rect id="矩形备份-5" fill="url(#linearGradient-3)" x="90.5" y="45.5" width="34" height="34"></rect>
+                    <path d="M124,0 L124,7.139 L94.3965551,7.14 L94.3973414,7.188804 C93.6260583,7.15637433 92.850713,7.14 92.0716182,7.14 C61.4198146,7.14 41.221492,31.4651603 41.221492,62.73 C41.221492,93.9948397 61.4198146,120.36 92.0716182,120.36 C92.850713,120.36 93.6260583,120.343626 94.3973414,120.311196 L94.3973414,120.311196 L94.3965551,120.36 L124,120.359 L124,127.5 L62.5,127.5 C27.9822031,127.5 0,98.9581528 0,63.75 C0,28.8939287 27.4253573,0.571503575 61.4664482,0.00854067862 L62.5,0 L124,0 Z" id="形状结合" fill="url(#linearGradient-4)"></path>
+                </g>
+                <g id="形状结合">
+                    <use fill="#D8D8D8" xlink:href="#path-6"></use>
+                    <use fill="url(#linearGradient-5)" xlink:href="#path-6"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

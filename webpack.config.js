@@ -12,7 +12,7 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
     let ObjConfig = {
         mode: env.mode, //模式  production 生产   development 开发
         entry: { //可以实现分包（代码分离，但是比较繁琐复杂重复模块会重复打包）
-            index: './src/index.ts',
+            index: './src/index.js',
             // index: './src/index.js',
             //   another: './src/another-module.js',
             //   print: './src/print.js',
@@ -31,31 +31,54 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
         output: {
             // filename: 'bundle.js',
             // filename: '[name][fullhash].bundle.js', //js打包名称
-            filename: '[name].[chunkhash:6].js',
-            chunkFilename: '[name].js', //非入口文件名称
+            filename: 'js/[name].[chunkhash:6].js',
+            chunkFilename: 'js/[name].js', //非入口文件名称
             path: path.resolve(__dirname, 'dist'), //输出文件名称
             clean: true, //清除打包文件重新打包
             publicPath: ASSET_PATH, //公共路径
         },
-        resolve: {
+        resolve: { //配置TS
             extensions: ['.tsx', '.ts', '.js'],
         },
         module: {
             rules: [{
                     test: /\.css$/i,
                     type: 'asset/resource',
-                    use: ['style-loader', 'css-loader'],
+                    // use: ['style-loader', 'css-loader'],
                     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                    generator: {
+                        filename: 'css/[hash][ext][query]', //资源文件打包路径
+                    }
                 },
                 {
                     test: /\.(png|svg|jpg|jpeg|gif)$/i,
                     type: 'asset/resource',
                     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                    generator: {
+                        filename: 'image/[hash][ext][query]', //资源文件打包路径
+                    }
+                },
+                {//没搞成
+                    test: /\.svg$/i,
+                    type: 'asset/inline',
+                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                    // generator: {
+                    //     filename: 'svg/[hash][ext][query]', //资源文件打包路径
+                    // },
+                    generator: {//使用自定义编码算法，则可以指定一个自定义函数来编码文件内容 所有 .svg 文件都将通过 mini-svg-data-uri 包进行编码
+                        dataUrl: content => {
+                            content = content.toString();
+                            return svgToMiniDataURI(content);
+                        }
+                    }
                 },
                 {
                     test: /\.(woff|woff2|eot|ttf|otf)$/i,
                     type: 'asset/resource',
                     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                    generator: {
+                        filename: 'font/[hash:6][ext][query]', //资源文件打包路径
+                    }
                 },
                 {
                     test: /\.tsx?$/,

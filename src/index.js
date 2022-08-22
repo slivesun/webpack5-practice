@@ -16,20 +16,22 @@ if ('serviceWorker' in navigator) { // PWA  渐进式网络应用环境判断
 
 function component() {
     // console.log(process.env.NODE_ENV,'dsadsd')
-    const element = document.createElement('pre');
-    element.innerHTML = [
-        'Hello webpack!',
-        '5 cubed is equal to ' + cube(5)
-    ].join('\n\n');
+    // const element = document.createElement('pre');
+    // element.innerHTML = [
+    //     'Hello webpack!',
+    //     '5 cubed is equal to ' + cube(5)
+    // ].join('\n\n');
 
-    // const element = document.createElement('div');
-    // element.classList.add('hello');
-    // const btn = document.createElement('button');
-    // element.innerHTML = _.join(['dsd', 'webpack'], ' ');
-    // btn.innerHTML = 'Click me and check the console!';
-    // btn.onclick = printMe.bind(null, 'asdasd');
-    // element.appendChild(btn);
-    // console.log(a)
+    const element = document.createElement('div');
+    element.classList.add('hello');
+    const btn = document.createElement('button');
+    element.innerHTML = _.join(['dsddsadas', 'webpack'], ' ');
+    btn.innerHTML = 'Click me and check the console!';
+    btn.onclick = printMe.bind(null, 'asdasd');
+    element.appendChild(btn);
+    const IMgElement = document.createElement('img');
+    IMgElement.src = require('./image/sad.png');
+    document.body.appendChild(IMgElement)
     return element;
 }
 let element = component(); // 存储 element，以在 print.js 修改时重新渲染
