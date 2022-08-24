@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const WebpackBar = require('webpackbar')
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const stylesHandler = MiniCssExtractPlugin.loader;
 // 尝试使用环境变量，否则使用根路径
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
@@ -12,7 +14,7 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
     let ObjConfig = {
         mode: env.mode, //模式  production 生产   development 开发
         entry: { //可以实现分包（代码分离，但是比较繁琐复杂重复模块会重复打包）
-            index: './src/index.js',
+            index: './src/index.ts',
             // index: './src/index.js',
             //   another: './src/another-module.js',
             //   print: './src/print.js',
@@ -37,54 +39,79 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             clean: true, //清除打包文件重新打包
             publicPath: ASSET_PATH, //公共路径
         },
-        resolve: { //配置TS
-            extensions: ['.tsx', '.ts', '.js'],
+        resolve: {
+            // extensions: ['.tsx', '.ts', '.js'], // 配置ts文件可以作为模块加载
         },
         module: {
-            rules: [{
-                    test: /\.css$/i,
-                    type: 'asset/resource',
-                    // use: ['style-loader', 'css-loader'],
+            rules: [
+                // {
+                //     test: /\.css$/i,
+                //     type: 'asset/resource',
+                //     // use: ['style-loader', 'css-loader'],
+                //     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                //     generator: {
+                //         filename: 'css/[hash][ext][query]', //资源文件打包路径
+                //     }
+                // },
+                {
+                    test: /\.s[ac]ss$/i,
+                    use: [stylesHandler, "css-loader", "postcss-loader", "sass-loader"],
                     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
-                    generator: {
-                        filename: 'css/[hash][ext][query]', //资源文件打包路径
-                    }
+                    // generator: {
+                    //     filename: 'css/[hash][ext][query]', //资源文件打包路径
+                    // }
                 },
                 {
-                    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                    test: /\.less$/i,
+                    use: [stylesHandler, "css-loader", "postcss-loader", "less-loader"],
+                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                    // generator: {
+                    //     filename: 'css/[hash][ext][query]', //资源文件打包路径
+                    // }
+                },
+                {
+                    test: /\.css$/i,
+                    use: [stylesHandler, "css-loader", "postcss-loader"],
+                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                    // generator: {
+                    //     filename: 'css/[hash][ext][query]', //资源文件打包路径
+                    // }
+                },
+                {
+                    test: /\.(ts|tsx)?$/,// .ts或者tsx后缀的文件，就是typescript文件
+                    use: 'ts-loader', // 就是上面安装的ts-loader
+                    exclude: ['/node_modules/'],// 排除node-modules目录
+                },
+                {
+                    test: /\.(png|svg|jpg|jpeg|gif|svg|woff|woff2|eot|ttf|otf)$/i,
                     type: 'asset/resource',
                     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
                     generator: {
                         filename: 'image/[hash][ext][query]', //资源文件打包路径
                     }
                 },
-                {//没搞成
-                    test: /\.svg$/i,
-                    type: 'asset/inline',
-                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
-                    // generator: {
-                    //     filename: 'svg/[hash][ext][query]', //资源文件打包路径
-                    // },
-                    generator: {//使用自定义编码算法，则可以指定一个自定义函数来编码文件内容 所有 .svg 文件都将通过 mini-svg-data-uri 包进行编码
-                        dataUrl: content => {
-                            content = content.toString();
-                            return svgToMiniDataURI(content);
-                        }
-                    }
-                },
-                {
-                    test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                    type: 'asset/resource',
-                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
-                    generator: {
-                        filename: 'font/[hash:6][ext][query]', //资源文件打包路径
-                    }
-                },
-                {
-                    test: /\.tsx?$/,
-                    use: 'ts-loader',
-                    exclude: /node_modules/,
-                },
+                // {//没搞成
+                //     test: /\.svg$/i,
+                //     type: 'asset/inline',
+                //     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                //     // generator: {
+                //     //     filename: 'svg/[hash][ext][query]', //资源文件打包路径
+                //     // },
+                //     generator: {//使用自定义编码算法，则可以指定一个自定义函数来编码文件内容 所有 .svg 文件都将通过 mini-svg-data-uri 包进行编码
+                //         dataUrl: content => {
+                //             content = content.toString();
+                //             return svgToMiniDataURI(content);
+                //         }
+                //     }
+                // },
+                // {
+                //     test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                //     type: 'asset/resource',
+                //     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                //     generator: {
+                //         filename: 'font/[hash:6][ext][query]', //资源文件打包路径
+                //     }
+                // },
             ]
         },
         plugins: [
@@ -106,6 +133,9 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
                 } : false, //mode是'production' 开启压缩
                 // hash: true, //是否启用增加文件名hash，可以防止缓存丢失
             }),
+            new MiniCssExtractPlugin({
+                filename: '[name].css'
+            }), //压缩css
             // new webpack.HotModuleReplacementPlugin(),//r热更新插件
             // env.analz ? new BundleAnalyzerPlugin() : null, //代码分析插件
             // new WebpackBar(), //打包进度条插件
@@ -143,7 +173,7 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             },
         },
         optimization: {
-            runtimeChunk: 'single',
+            // runtimeChunk: 'single',
             usedExports: true,
             moduleIds: 'deterministic', //保证splitChunks-cacheGroups拆分出的文件hash名称不变提升打包速度
             splitChunks: { //分离各种文件作用：将不长变更的依赖包抽离打包，将经常改的业务文件单独打包，打包时共用文件只需打包一份速度会有质的提高
