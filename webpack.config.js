@@ -6,6 +6,7 @@ const WebpackBar = require('webpackbar')
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const stylesHandler = MiniCssExtractPlugin.loader;
+// const friendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');//命令友好提示
 // 尝试使用环境变量，否则使用根路径
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
@@ -14,7 +15,7 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
     let ObjConfig = {
         mode: env.mode, //模式  production 生产   development 开发
         entry: { //可以实现分包（代码分离，但是比较繁琐复杂重复模块会重复打包）
-            index: './src/index.ts',
+            index: './src/index.tsx',
             // index: './src/index.js',
             //   another: './src/another-module.js',
             //   print: './src/print.js',
@@ -40,7 +41,10 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             publicPath: ASSET_PATH, //公共路径
         },
         resolve: {
-            // extensions: ['.tsx', '.ts', '.js'], // 配置ts文件可以作为模块加载
+            extensions: ['.tsx', '.ts', '.js'], // 配置ts文件可以作为模块加载
+            alias: {
+                '@components': path.resolve(__dirname, "/src/components"),
+            }
         },
         module: {
             rules: [
@@ -78,9 +82,9 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
                     // }
                 },
                 {
-                    test: /\.(ts|tsx)?$/,// .ts或者tsx后缀的文件，就是typescript文件
+                    test: /\.(ts|tsx)?$/, // .ts或者tsx后缀的文件，就是typescript文件
                     use: 'ts-loader', // 就是上面安装的ts-loader
-                    exclude: ['/node_modules/'],// 排除node-modules目录
+                    exclude: ['/node_modules/'], // 排除node-modules目录
                 },
                 {
                     test: /\.(png|svg|jpg|jpeg|gif|svg|woff|woff2|eot|ttf|otf)$/i,

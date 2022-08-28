@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+      "allowSyntheticDefaultImports":true,//不加 react 导入会报错
+      "esModuleInterop": true,//不加 react 导入会报错
       "outDir": "./dist/",
       "sourceMap": true,
       "noImplicitAny": true,
@@ -8,6 +10,12 @@
       "jsx": "react",
       "allowJs": true,
       "moduleResolution": "node",
-      "strict": true
+		  "allowUnreachableCode": true, // 不报告执行不到的代码错误。
+      "baseUrl": "./src",// 工作根目录
+      "paths": { // 指定模块的路径，和baseUrl有关联，和webpack中resolve.alias配置一样
+        "@components/*": [
+          "components/*"
+        ],
+      },
     }
 }
