@@ -30,7 +30,8 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             // shared: 'lodash',
         },
         // 'source-map' : 'cheap-module-source-map'
-        devtool: env.mode == 'development' ? 'inline-source-map' : 'source-map', //控制台打印报错，生产环境不要用属于开发工具,会生成js.map文件
+        // devtool: env.mode == 'development' ? 'inline-source-map' : 'source-map', //控制台打印报错，生产环境不要用属于开发工具,会生成js.map文件
+        devtool: 'cheap-module-source-map', //控制台打印报错，生产环境不要用属于开发工具,会生成js.map文件
         output: {
             // filename: 'bundle.js',
             // filename: '[name][fullhash].bundle.js', //js打包名称
@@ -43,7 +44,7 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
         resolve: {
             extensions: ['.tsx', '.ts', '.js'], // 配置ts文件可以作为模块加载
             alias: {
-                '@components': path.resolve(__dirname, "/src/components"),
+                '~': path.resolve(__dirname, "/src"),
             }
         },
         module: {
@@ -119,7 +120,7 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             ]
         },
         plugins: [
-            // new webpack.ProgressPlugin(), //监控各个hook执行的进度percentage，输出各个hook的名称和描述
+            new webpack.ProgressPlugin(), //监控各个hook执行的进度percentage，输出各个hook的名称和描述
             new HtmlWebpackPlugin({ //插件的基本作用就是生成html文件。
                 title: '啊实打', //更改标签头部内容，有模板时不生效
                 filename: 'index.html', //打包输出的文件名
@@ -175,9 +176,12 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
                     errors: true
                 }, //报错信息是否显示在屏幕
             },
+            // historyApiFallback: {//和以及 output.publicPath 解决 history 模式页面刷新后出现 404 的情况。
+            //     disableDotRule: true
+            // }
         },
         optimization: {
-            // runtimeChunk: 'single',
+            runtimeChunk: 'single',
             usedExports: true,
             moduleIds: 'deterministic', //保证splitChunks-cacheGroups拆分出的文件hash名称不变提升打包速度
             splitChunks: { //分离各种文件作用：将不长变更的依赖包抽离打包，将经常改的业务文件单独打包，打包时共用文件只需打包一份速度会有质的提高
