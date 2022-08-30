@@ -39,12 +39,13 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             chunkFilename: 'js/[name].js', //非入口文件名称
             path: path.resolve(__dirname, 'dist'), //输出文件名称
             clean: true, //清除打包文件重新打包
+            // publicPath: '/', //公共路径
             publicPath: ASSET_PATH, //公共路径
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'], // 配置ts文件可以作为模块加载
             alias: {
-                '~': path.resolve(__dirname, "/src"),
+                '@': path.resolve(__dirname, "src"),
             }
         },
         module: {
@@ -179,6 +180,8 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             // historyApiFallback: {//和以及 output.publicPath 解决 history 模式页面刷新后出现 404 的情况。
             //     disableDotRule: true
             // }
+            // inline: true, //缺少该配置，会出现上面的错误
+            historyApiFallback: true //缺少该配置，会出现上面的错误
         },
         optimization: {
             runtimeChunk: 'single',
