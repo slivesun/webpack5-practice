@@ -1,10 +1,11 @@
 
 import React, { lazy, ReactNode } from 'react'
+import { Spin } from 'antd';
 import { Outlet } from 'react-router-dom';
 import * as Common from './routeCommon';
 const lazyLoad = (Children: any): ReactNode => {//lazy 解决 闪烁白屏
     return (
-        <React.Suspense fallback={null}>
+        <React.Suspense fallback={<Spin></Spin>}>
             <Children />
         </React.Suspense>
     )
@@ -24,6 +25,7 @@ const routeConfig: RouteObject[] = [
         children: [
             { path: '/home', element: lazyLoad(lazy(() => import('@/pages/home/home'))) },//lazy路由懒加载，不切换到相应路由不加载dom
             { path: '/list', element: lazyLoad(lazy(() => import('@/pages/list/list'))) },
+            { path: '/sys', element: lazyLoad(lazy(() => import('@/pages/sys/sys'))) },
             { path: '/*', element: <div>404</div> }
         ]
     },

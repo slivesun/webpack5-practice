@@ -1,0 +1,26 @@
+.layouts {
+    height: 100vh;
+
+    .layouts_wrap {
+        height: 100%;
+        .sider{
+            .logo{
+                height: 60px;
+                background-color: aqua;
+            }
+        }
+        .right{
+            .header{
+                background-color: #fff;
+            }
+            .content{
+                background-color: rebeccapurple;
+                padding: 10px;
+            }
+            .footer{
+                text-align: center;
+                background-color: #fff;
+            }
+        }
+    }
+}

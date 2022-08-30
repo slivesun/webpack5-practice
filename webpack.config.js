@@ -69,8 +69,23 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
                 },
                 {
                     test: /\.less$/i,
-                    use: [stylesHandler, "css-loader", "postcss-loader", "less-loader"],
-                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                    // use: [stylesHandler,"css-loader", "postcss-loader", "less-loader"],
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                /**
+                                 * 解决less报错 错误信息 https://github.com/ant-design/ant-motion/issues/44
+                                 */
+                                lessOptions: {
+                                    javascriptEnabled: true
+                                }
+                            }
+                        }
+                    ]
+                    // include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
                     // generator: {
                     //     filename: 'css/[hash][ext][query]', //资源文件打包路径
                     // }
