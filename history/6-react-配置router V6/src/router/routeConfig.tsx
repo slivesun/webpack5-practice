@@ -1,6 +1,6 @@
 
 import React, { lazy, ReactNode } from 'react'
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import * as Common from './routeCommon';
 const lazyLoad = (Children: any): ReactNode => {//lazy 解决 闪烁白屏
     return (
@@ -17,16 +17,20 @@ interface RouteObject {
     path?: string;
 }
 const routeConfig: RouteObject[] = [
+    { path: '/login', element: lazyLoad(lazy(() => import('@/pages/login/login'))) },
     {
         path: '/',
         element: lazyLoad(lazy(() => import('@/components/layouts/layouts'))),
         children: [
             { path: '/home', element: lazyLoad(lazy(() => import('@/pages/home/home'))) },//lazy路由懒加载，不切换到相应路由不加载dom
             { path: '/list', element: lazyLoad(lazy(() => import('@/pages/list/list'))) },
-            { path: '/*', element: <div>404</div> }
+            // { path: '/*', element: <div>404</div> }
         ]
     },
-    { path: '/login', element: <Common.LogIn /> },
+    {
+        path:'/s',
+        element:<Navigate to='/login'/>
+    },
     { path: '/*', element: <div>404</div> }
 ]
 

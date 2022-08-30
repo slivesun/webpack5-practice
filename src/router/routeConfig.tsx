@@ -17,6 +17,7 @@ interface RouteObject {
     path?: string;
 }
 const routeConfig: RouteObject[] = [
+    { path: '/login', element: lazyLoad(lazy(() => import('@/pages/login/login'))) },
     {
         path: '/',
         element: lazyLoad(lazy(() => import('@/components/layouts/layouts'))),
@@ -26,7 +27,6 @@ const routeConfig: RouteObject[] = [
             { path: '/*', element: <div>404</div> }
         ]
     },
-    { path: '/login', element: <Common.LogIn /> },
     { path: '/*', element: <div>404</div> }
 ]
 
