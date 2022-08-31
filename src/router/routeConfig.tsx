@@ -33,26 +33,4 @@ const routeConfig: RouteObject[] = [
     },
     { path: '/*', element: <div>404</div> }
 ]
-
-
-// const routeConfig = [
-//     {
-//         path: '/home',
-//         element: <Common.Home />
-//     },
-//     {
-//         path: '/list/:id',
-//         element: <Common.List />
-//     },
-//     {
-//         path: '/children',
-//         // element: <Layout />,
-//         // children: [
-//         //     { path: '/children/child1', element: <Child1 /> },
-//         //     { path: '/children/child2', element: <Child2 /> }
-//         // ]
-//     }
-// ]
-
-
 export default routeConfig
