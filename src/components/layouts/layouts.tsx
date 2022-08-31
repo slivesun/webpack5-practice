@@ -1,78 +1,14 @@
 
 import * as React from "react";
 import { useSetState } from 'ahooks';
-import {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-} from '@ant-design/icons';
 import { Button, Layout, Menu, } from "antd";
-import type { MenuProps, MenuTheme } from 'antd'
+import { MenuUnfoldOutlined, } from '@ant-design/icons';
 import { useEffect, useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import muenuList from './muenu.config';
 const { Header, Content, Footer, Sider } = Layout;
 import './layouts.scss';
-type MenuItem = Required<MenuProps>['items'][number];
-// interface muenu extends MenuItem {
-//     label: React.ReactNode,
-//     key?: React.Key | null,
-//     icon?: React.ReactNode,
-//     children?: MenuItem[],
-//     theme?: 'light' | 'dark',
-// }
-let muenuList: any = [
-    {
-        icon: React.createElement(VideoCameraOutlined),
-        children: [
-            {
-                key: '/home',
-                icon: React.createElement(VideoCameraOutlined),
-                label: `nav 首页`,
-            }
-        ],
-        label: '首页',
-        theme: 'light',
 
-    },
-    {
-        icon: React.createElement(UserOutlined),
-        children: [
-            {
-                key: '/list',
-                icon: React.createElement(VideoCameraOutlined),
-                label: `nav 列表页`,
-            }
-        ],
-        label: '列表页',
-        theme: 'light',
-    },
-    {
-        icon: React.createElement(UploadOutlined),
-        children: [
-            {
-                key: '/sys',
-                icon: React.createElement(VideoCameraOutlined),
-                label: `nav 凑数页`,
-            }
-        ],
-        label: '凑数页',
-        theme: 'light',
-    },
-    {
-        icon: React.createElement(UserOutlined),
-        children: [
-            {
-                key: '/login',
-                icon: React.createElement(VideoCameraOutlined),
-                label: `nav 去登录`,
-            }
-        ],
-        label: '去登录',
-        theme: 'light',
-    },
-]
 const Layouts = (props: any) => {
     const [collapsed, setCollapsed] = useState(false);
     const navigate = useNavigate();
@@ -98,6 +34,7 @@ const Layouts = (props: any) => {
                 <Menu
                     theme="dark"
                     mode="inline"
+                    selectedKeys={state.openKeys}
                     // openKeys={[state.openKeys]}
                     // onOpenChange={(keys) => {
                     //     const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
@@ -114,8 +51,10 @@ const Layouts = (props: any) => {
                     // }}
                     onClick={(e) => {
                         console.log(e)
-                        navigate(e.key)
-
+                        navigate(e.key, { state: { a: 1, l: 'asd' } })
+                        setState({
+                            openKeys: e.key
+                        })
                     }}
                     items={
                         muenuList
@@ -132,7 +71,14 @@ const Layouts = (props: any) => {
             </Sider>
             <Layout className='right'>
                 <Header className="header" >
-                    toubu
+                    <div
+                        className="out"
+                        onClick={() => {
+                            navigate('/login')
+                        }}
+                    >
+                        <MenuUnfoldOutlined />退出
+                    </div>
                 </Header>
                 <Content className='content'>
                     <Outlet />

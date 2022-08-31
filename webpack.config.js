@@ -80,7 +80,23 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
                                  * 解决less报错 错误信息 https://github.com/ant-design/ant-motion/issues/44
                                  */
                                 lessOptions: {
-                                    javascriptEnabled: true
+                                    javascriptEnabled: true,
+                                    sourceMap: true,
+                                    modifyVars: {//配置antd主题
+                                        'primary-color': '#F3822A', //主题色
+                                        'border-radius-base': '3px', //组件/浮层圆角圆角
+                                        'font-size-base': '14px', // 主字号
+                                        // 'link-color': '#F32ABF',//链接色
+                                        // 'border-color-base': 'red', // 边框色
+                                        // 'success-color': '#52c41a', // 成功色
+                                        // 'warning-color': '#faad14', // 警告色
+                                        // 'error-color': '#f5222d', // 错误色
+                                        // 'heading-color': 'rgba(0, 0, 0, 0.85)', // 标题色
+                                        // 'text-color': 'rgba(0, 0, 0, 0.65)', // 主文本色
+                                        // 'text-color-secondary': 'rgba(0, 0, 0, 0.45)', // 次文本色
+                                        // 'disabled-color': 'rgba(0, 0, 0, 0.25)', // 失效色
+                                        // 'box-shadow-base': '0 3 px 6 px - 4 px rgba(0, 0, 0, 0.12), 0 6 px 16 px 0 rgba(0, 0, 0, 0.08), 0 9 px 28 px 8 px rgba(0, 0, 0, 0.05)', // 浮层阴影
+                                    },
                                 }
                             }
                         }
