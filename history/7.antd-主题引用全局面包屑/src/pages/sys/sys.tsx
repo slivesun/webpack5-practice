@@ -3,14 +3,14 @@ import { useSetState } from 'ahooks'
 interface State { }
 const Page = () => {
     const [state, setState] = useSetState<State>({
-
+        
     })
     useEffect(() => {
-
+         
     }, [])
     return (
         <div className='' >
-            财务报表
+             sys
         </div>
     )
 }

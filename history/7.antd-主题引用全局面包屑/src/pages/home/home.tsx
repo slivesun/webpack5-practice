@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSetState } from 'ahooks'
 interface State { }
-const Page = () => {
+const Home = () => {
     const [state, setState] = useSetState<State>({
 
     })
@@ -10,8 +10,8 @@ const Page = () => {
     }, [])
     return (
         <div className='' >
-            财务报表
+            home
         </div>
     )
 }
-export default Page
+export default Home
