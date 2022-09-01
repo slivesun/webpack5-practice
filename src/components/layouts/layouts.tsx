@@ -40,6 +40,26 @@ const Layouts = (props: any) => {
         openKeys: [],
         collapsed: false
     })
+
+
+    // 菜单打开，其余关闭
+    const onOpenChange = (keys: any) => {
+        console.log(keys, 'dddddd')
+        const latestOpenKey = keys.find((key: any) => state.openKeys.indexOf(key) === -1);
+        let rootMeunKey: any[] = []
+        muenuList.forEach(it => {
+            rootMeunKey.push(String(it.key))
+        })
+        if (rootMeunKey.indexOf(latestOpenKey) == -1) {
+            setState({
+                openKeys: keys
+            });
+        } else {
+            setState({
+                openKeys: latestOpenKey ? [latestOpenKey] : []
+            })
+        }
+    };
     return <div className='layouts'>
         <Layout className='layouts_wrap'>
             <div className="layouts_left">
@@ -50,6 +70,7 @@ const Layouts = (props: any) => {
                     className='sider'
                     breakpoint="lg"
                     collapsedWidth="40"
+                    theme="light"
                     reverseArrow
                     onBreakpoint={broken => {
                         // console.log(broken);
@@ -60,15 +81,13 @@ const Layouts = (props: any) => {
                     collapsed={state.collapsed}
                 >
                     <Menu
-                        theme="dark"
+                        theme="light"
                         mode="inline"
-                        selectedKeys={state.openKeys}
+                        openKeys={state.openKeys}
+                        onOpenChange={onOpenChange}
                         onClick={(e) => {
                             console.log(e)
                             navigate(e.key, { state: { a: 1, l: 'asd' } })
-                            setState({
-                                openKeys: e.key
-                            })
                         }}
                         items={
                             muenuList

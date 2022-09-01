@@ -1,15 +1,8 @@
-import React, { useEffect } from 'react'
-import { useSetState } from 'ahooks'
-interface State { }
+
+import React from 'react';
 const Home = () => {
-    const [state, setState] = useSetState<State>({
-
-    })
-    useEffect(() => {
-
-    }, [])
     return (
-        <div className='' >
+        <div className='home' >
             home
         </div>
     )

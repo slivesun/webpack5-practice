@@ -35,7 +35,7 @@ const muenuList: any[] = [
         ],
         label: '首页',
         theme: 'light',
-
+        key: 1
     },
     {
         icon: React.createElement(UserOutlined),
@@ -48,6 +48,7 @@ const muenuList: any[] = [
         ],
         label: '列表页',
         theme: 'light',
+        key: 2
     },
     {
         icon: React.createElement(UploadOutlined),
@@ -60,6 +61,13 @@ const muenuList: any[] = [
         ],
         label: '凑数页',
         theme: 'light',
+        key: 3
+    },
+    {
+        key: '/login',
+        icon: React.createElement(VideoCameraOutlined),
+        label: `退出登陆`,
+        theme: 'dark',
     },
 ]
 export default muenuList
