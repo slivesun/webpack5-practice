@@ -2,6 +2,7 @@ import type { BadgeProps } from 'antd';
 import { Badge, Calendar } from 'antd';
 import type { Moment } from 'moment';
 import React from 'react';
+import './list.scss'
 
 const getListData = (value: Moment) => {
     let listData;
@@ -64,7 +65,14 @@ const List: React.FC = () => {
         );
     };
 
-    return <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} />;
+    return <div className='list'>
+        <div className='list_top'>吸顶块</div>
+        <div className='false_content'>假装有内容</div>
+        <div className='list_top2'>吸顶块2</div>
+        <div className='false_content'>假装有内容2</div>
+        <div className='list_top3'>吸顶块3</div>
+        <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
+    </div>;
 };
 
 export default List;
