@@ -2,8 +2,10 @@ import React, { useEffect } from 'react'
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
 import { useSetState } from 'ahooks';
 import './login.scss';
+import { useNavigate } from 'react-router-dom'
 interface State { }
 const Page = () => {
+    let navigate = useNavigate()
     const [state, setState] = useSetState<State>({
     })
 
@@ -13,6 +15,7 @@ const Page = () => {
 
     const onFinish = (values: any) => {
         console.log('Success:', values);
+        navigate('/home')
     };
 
     const onFinishFailed = (errorInfo: any) => {

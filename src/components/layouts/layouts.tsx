@@ -20,10 +20,8 @@ const Layouts = (props: any) => {
     // 配置全局路由
     const location = useLocation();
     const pathSnippets = location.pathname.split('/').filter((i) => i);
-    console.log(pathSnippets, 'pathSnippetspathSnippetspathSnippets')
     const extraBreadcrumbItems = pathSnippets.map((_, index) => {
         const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
-        console.log(url, 'urlurlurlurlurlurlurlurl')
         return (
             <Breadcrumb.Item key={url}>
                 <Link to={url}>{breadcrumbNameMap[url]}</Link>
@@ -37,69 +35,62 @@ const Layouts = (props: any) => {
     // ].concat(extraBreadcrumbItems);
     const breadcrumbItems = extraBreadcrumbItems;
 
-
-    const [collapsed, setCollapsed] = useState(false);
     const navigate = useNavigate();
     let [state, setState] = useSetState<any>({
-        openKeys: []
+        openKeys: [],
+        collapsed: false
     })
     return <div className='layouts'>
         <Layout className='layouts_wrap'>
-            <Sider
-                className='sider'
-                breakpoint="lg"
-                collapsedWidth="0"
-                onBreakpoint={broken => {
-                    console.log(broken);
-                }}
-                onCollapse={(collapsed, type) => {
-                    console.log(collapsed, type);
-                }}
-            >
+            <div className="layouts_left">
                 <div className="logo" >
-                    logo
+                    {state.collapsed ? 'O' : 'logo'}
                 </div>
-                <Menu
-                    theme="dark"
-                    mode="inline"
-                    selectedKeys={state.openKeys}
-                    // openKeys={[state.openKeys]}
-                    // onOpenChange={(keys) => {
-                    //     const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
-                    //     const latestOpenKey = keys.find(key => state.openKeys.indexOf(key) === -1);
-                    //     if (rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
-                    //         setState({
-                    //             openKeys: keys
-                    //         })
-                    //     } else {
-                    //         setState({
-                    //             openKeys: latestOpenKey ? [latestOpenKey] : []
-                    //         })
-                    //     }
-                    // }}
-                    onClick={(e) => {
-                        console.log(e)
-                        navigate(e.key, { state: { a: 1, l: 'asd' } })
-                        setState({
-                            openKeys: e.key
-                        })
+                <Sider
+                    className='sider'
+                    breakpoint="lg"
+                    collapsedWidth="40"
+                    reverseArrow
+                    onBreakpoint={broken => {
+                        // console.log(broken);
                     }}
-                    items={
-                        muenuList
-                        // [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
-                        //     (icon, index) => ({
-                        //         key: String(index + 1),
-                        //         icon: React.createElement(icon),
-                        //         label: `nav ${index + 1}`,
-                        //         keypath: '/home'
-                        //     }),
-                        // )
-                    }
-                />
-            </Sider>
+                    onCollapse={(collapsed, type) => {
+                        console.log(collapsed, type, 'dddddddddddd');
+                    }}
+                    collapsed={state.collapsed}
+                >
+                    <Menu
+                        theme="dark"
+                        mode="inline"
+                        selectedKeys={state.openKeys}
+                        onClick={(e) => {
+                            console.log(e)
+                            navigate(e.key, { state: { a: 1, l: 'asd' } })
+                            setState({
+                                openKeys: e.key
+                            })
+                        }}
+                        items={
+                            muenuList
+                        }
+                    />
+                </Sider>
+            </div>
             <Layout className='right'>
                 <Header className="header" >
-                    <div>
+                    <div className="header_left">
+                        <div className="collapsed">
+                            <div
+                                className="silder_show"
+                                onClick={() => {
+                                    setState({
+                                        collapsed: !state.collapsed
+                                    })
+                                }}
+                            >
+                                <MenuUnfoldOutlined />
+                            </div>
+                        </div>
                         <Breadcrumb>{
                             Object.keys(breadcrumbNameMap).includes('/' + pathSnippets.join('/')) ?
                                 breadcrumbItems : (

@@ -3,52 +3,58 @@
 
     .layouts_wrap {
         height: 100%;
-        .sider{
-            .logo{
+
+        .layouts_left {
+            .logo {
                 height: 64px;
                 background-color: rgb(154, 154, 154);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .sider {
+                height: calc(100vh - 64px);
+                overflow: auto;
             }
         }
-        .right{
-            .header{
+
+        .right {
+            .header {
                 background-color: #fff;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                .out{
+
+                .header_left {
+                    display: flex;
+                    align-items: center;
+
+                    .collapsed {
+                        margin-right: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .silder_show {
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .out {
                     cursor: pointer;
                 }
             }
-            .content{
+
+            .content {
                 background-color: rgb(203, 203, 204);
                 padding: 10px;
                 max-height: 100%;
                 overflow: auto;
-                &::-webkit-scrollbar {
-                    width: 1px;
-                    height: 1px;
-                    /**/
-                }
-
-                &::-webkit-scrollbar-track {
-                    background: rgb(239, 239, 239);
-                    border-radius: 2px;
-                }
-
-                &::-webkit-scrollbar-thumb {
-                    background: #bfbfbf;
-                    border-radius: 10px;
-                }
-
-                &::-webkit-scrollbar-thumb:hover {
-                    background: #333;
-                }
-
-                &::-webkit-scrollbar-corner {
-                    background: rgb(239, 239, 239);
-                }
             }
-            .footer{
+
+            .footer {
                 text-align: center;
                 background-color: #fff;
             }
