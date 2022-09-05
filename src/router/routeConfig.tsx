@@ -3,8 +3,9 @@ import React, { lazy, ReactNode } from 'react'
 import { Spin } from 'antd';
 import { Navigate, Outlet } from 'react-router-dom';
 import Charts from '@/pages/charts/charts'
-const lazyLoad = (Children: any): ReactNode => {//lazy 解决 闪烁白屏
+const lazyLoad = (Children: any): ReactNode => {//lazy懒加载 解决 闪烁白屏
     return (
+        //lazy懒加载 解决 闪烁白屏 fallback = 加载过程显示
         <React.Suspense fallback={<Spin></Spin>}>
             <Children />
         </React.Suspense>
