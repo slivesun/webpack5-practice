@@ -44,6 +44,11 @@ const muenuList: any[] = [
                 key: '/ifrence',
                 icon: React.createElement(VideoCameraOutlined),
                 label: `nav 财务报表`,
+            },
+            {
+                key: '/charts',
+                icon: React.createElement(VideoCameraOutlined),
+                label: `echarts`,
             }
         ],
         label: '列表页',

@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
       "allowSyntheticDefaultImports":true,//不加 react 导入会报错
+      "resolveJsonModule": true,
       "esModuleInterop": true,//不加 react 导入会报错
       "outDir": "./dist/",
       "sourceMap": true,

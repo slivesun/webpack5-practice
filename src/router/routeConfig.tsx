@@ -2,6 +2,7 @@
 import React, { lazy, ReactNode } from 'react'
 import { Spin } from 'antd';
 import { Navigate, Outlet } from 'react-router-dom';
+import Charts from '@/pages/charts/charts'
 const lazyLoad = (Children: any): ReactNode => {//lazy 解决 闪烁白屏
     return (
         <React.Suspense fallback={<Spin></Spin>}>
@@ -28,6 +29,7 @@ const routeConfig: RouteObject[] = [
             { path: '/ifrence', element: lazyLoad(lazy(() => import('@/pages/ifrence/ifrence'))) },
             { path: '/order', element: lazyLoad(lazy(() => import('@/pages/order/order'))) },
             { path: '/order/:id', element: lazyLoad(lazy(() => import('@/pages/order/detail/detail'))) },
+            { path: '/charts', element: <Charts></Charts> },
             {// 这里解决默认打开home页面
                 path: "",
                 element: <Navigate to="home" replace />
