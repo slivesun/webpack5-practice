@@ -28,7 +28,6 @@ console.log(counterSlice.reducer({ value: 3 }, increment), '3+1')
 console.log('action/incrementByAmount是', incrementByAmount(5))
 console.log(counterSlice.reducer({ value: 3 }, incrementByAmount(123)), '3+123')
 
-export default counterSlice.reducer
 export const incrementAsync = (amount: any) => (dispatch: (arg0: { payload: any; type: string }) => void) => {
     setTimeout(() => {
         dispatch(incrementByAmount(amount))
@@ -38,3 +37,5 @@ export const incrementAsync = (amount: any) => (dispatch: (arg0: { payload: any;
 incrementAsync(40)
 console.log(incrementByAmount(5))
 export const selectCount = (state: { counter: { value: any } }) => state.counter.value
+
+export default counterSlice.reducer
