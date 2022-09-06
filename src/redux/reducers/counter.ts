@@ -1,8 +1,8 @@
 
 import { createSlice } from '@reduxjs/toolkit'
 export const counterSlice = createSlice({
-    name: 'counter',
-    initialState: {
+    name: 'counter',//
+    initialState: {//
         value: 0
     },
     reducers: {
@@ -36,6 +36,7 @@ export const incrementAsync = (amount: any) => (dispatch: (arg0: { payload: any;
 }
 incrementAsync(40)
 console.log(incrementByAmount(5))
-export const selectCount = (state: { counter: { value: any } }) => state.counter.value
+// 获取 某项 值
+export const selectCount = (state: { counter: { value: any } }) => state
 
 export default counterSlice.reducer

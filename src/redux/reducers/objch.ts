@@ -1,5 +1,7 @@
 import { State, Action } from '../index';
-const initialState: State = {}
+const initialState: State = {
+    value:'sadas'
+}
 export default function objch(state: State = initialState, action: Action): State {
     let obj: State = JSON.parse(JSON.stringify(action))
     delete obj.type
@@ -15,3 +17,4 @@ export default function objch(state: State = initialState, action: Action): Stat
     // 返回原来的 state 不变
     return state
 }
+export const a = (state: any)=>state

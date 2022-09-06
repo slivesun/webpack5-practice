@@ -2,6 +2,8 @@ import type { BadgeProps } from 'antd';
 import { Badge, Calendar } from 'antd';
 import type { Moment } from 'moment';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectCount } from '@/redux/reducers/counter'
 import './list.scss'
 
 const getListData = (value: Moment) => {
@@ -42,6 +44,7 @@ const getMonthData = (value: Moment) => {
 };
 
 const List: React.FC = () => {
+    const count = useSelector(selectCount)
     const monthCellRender = (value: Moment) => {
         const num = getMonthData(value);
         return num ? (
@@ -66,6 +69,7 @@ const List: React.FC = () => {
     };
 
     return <div className='list'>
+        {/* <div>{count}</div> */}
         <div className='list_top'>吸顶块</div>
         <div className='false_content'>假装有内容</div>
         <div className='list_top2'>吸顶块2</div>

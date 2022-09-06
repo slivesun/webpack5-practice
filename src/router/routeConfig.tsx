@@ -31,6 +31,7 @@ const routeConfig: RouteObject[] = [
             { path: '/order', element: lazyLoad(lazy(() => import('@/pages/order/order'))) },
             { path: '/order/:id', element: lazyLoad(lazy(() => import('@/pages/order/detail/detail'))) },
             { path: '/charts', element: <Charts></Charts> },
+            { path: '/reduxNum', element: lazyLoad(lazy(()=>import('@/pages/reduxNum/reduxNum'))) },
             {// 这里解决默认打开home页面
                 path: "",
                 element: <Navigate to="home" replace />

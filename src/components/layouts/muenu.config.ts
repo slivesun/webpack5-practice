@@ -62,6 +62,11 @@ const muenuList: any[] = [
                 key: '/order',
                 icon: React.createElement(VideoCameraOutlined),
                 label: `nav 订单列表`,
+            },
+            {
+                key: '/reduxNum',
+                icon: React.createElement(VideoCameraOutlined),
+                label: `reduxNum`,
             }
         ],
         label: '凑数页',
