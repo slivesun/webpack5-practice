@@ -1,0 +1,30 @@
+.login {
+    background-color: rgba(0, 255, 255, 0.051);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .wrap {
+        width: 400px;
+        background-color: #fff;
+        padding: 30px;
+        border: #eee 1px solid;
+        border-radius: 10px;
+        box-shadow: 0 0 3px #717070;
+        // // display: flex;
+        // flex-direction: column;
+        // align-items: center;
+
+        .form_l {
+            width: 100%;
+        }
+
+        .dl {
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 20px;
+            text-align: center;
+        }
+    }
+}

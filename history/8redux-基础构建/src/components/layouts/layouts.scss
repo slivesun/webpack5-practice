@@ -1,0 +1,62 @@
+.layouts {
+    height: 100vh;
+
+    .layouts_wrap {
+        height: 100%;
+
+        .layouts_left {
+            .logo {
+                height: 64px;
+                background-color: rgb(154, 154, 154);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .sider {
+                height: calc(100vh - 64px);
+                overflow: auto;
+            }
+        }
+
+        .right {
+            .header {
+                background-color: #fff;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .header_left {
+                    display: flex;
+                    align-items: center;
+
+                    .collapsed {
+                        margin-right: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .silder_show {
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .out {
+                    cursor: pointer;
+                }
+            }
+
+            .content {
+                background-color: rgb(203, 203, 204);
+                max-height: 100%;
+                overflow: auto;
+            }
+
+            .footer {
+                text-align: center;
+                background-color: #fff;
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+.list {
+    padding: 200px 0;
+
+    .list_top {
+        height: 50px;
+        background-color: rgb(229, 87, 87);
+        border-top: 1px solid #aaa;
+        margin-bottom: 10px;
+        position: sticky;
+        position: -webkit-sticky;
+        top: 0px;
+        z-index: 999;
+    }
+
+    .false_content {
+        height: 100px;
+        background-color: aquamarine;
+    }
+
+    .list_top2 {
+        height: 50px;
+        background-color: rgb(48, 173, 231);
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        margin-bottom: 10px;
+    }
+
+    .list_top3 {
+        height: 50px;
+        background-color: rgb(231, 48, 191);
+        position: sticky;
+        top: 50px;
+        z-index: 999;
+        margin-bottom: 10px;
+    }
+}

@@ -1,72 +1,26 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-    decrement,
-    increment,
-    incrementByAmount,
-    incrementAsync,
-    selectCount
-} from '@/redux/reducers/counter'
-import objch, { a } from '@/redux/reducers/objch';
-
+import { AddPostForm } from './reduxNumFrom'
+import { postdelate, StateT } from '@/redux/reducers/posts/postsSlice'
 export default function Counter() {
-    const count = useSelector(selectCount)
-    const bf = useSelector(a)
     const dispatch = useDispatch()
-
-
-
-
-    const [incrementAmount, setIncrementAmount] = useState('2')
-
-    // later
+    const posts = useSelector((state: any) => state.posts)
+    const renderedPosts = posts.map((post: StateT) => (
+        <article className="post-excerpt" key={post.id}>
+            <h3>{post.title}</h3>
+            <p className="post-content">{post.content.substring(0, 100)}</p>
+            <button
+                onClick={() => {
+                    dispatch(postdelate(post.id))
+                }}
+            >删除此数据</button>
+        </article>
+    ))
     return (
-        <div>
-            <span >{JSON.stringify(count)}</span><br/>
-            <span >{JSON.stringify(bf)}</span>
-            <input
-                aria-label="Set increment amount"
-                value={incrementAmount}
-                onChange={e => setIncrementAmount(e.target.value)}
-            />
-            <button
-                // onClick={() => dispatch(objch({value:1,type:'sad'},{type:'objch'}))}
-            >
-                aabsssd
-            </button>
-            <button
-                onClick={() => dispatch(incrementByAmount(Number(incrementAmount) || 0))}
-            >
-                Add Amount
-            </button>
-            <button
-                onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0) as any)}
-            >
-                Add Async
-            </button>
-        </div>
+        <section className="posts-list">
+            <AddPostForm />
+            <h2>Posts</h2>
+            {renderedPosts}
+        </section>
     )
-
-
-
-    // return (
-    //     <div>
-    //         <div>
-    //             <button
-    //                 aria-label="Increment value"
-    //                 onClick={() => dispatch(increment())}
-    //             >
-    //                 +
-    //             </button>
-    //             <span >{count}</span>
-    //             <button
-    //                 aria-label="Decrement value"
-    //                 onClick={() => dispatch(decrement())}
-    //             >
-    //                 -
-    //             </button>
-    //         </div>
-    //         {/* 这里省略了额外的 render 代码 */}
-    //     </div>
-    // )
 }
