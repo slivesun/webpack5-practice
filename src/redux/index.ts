@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './reducers/reducer';
 export interface State { [propName: string]: any; }
 export interface Action extends State { type?: string }

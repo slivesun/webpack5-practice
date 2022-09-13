@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { nanoid } from '@reduxjs/toolkit';//引入随机生成的id
 import { useDispatch } from 'react-redux';
-import { postAdded } from '@/redux/reducers/posts/postsSlice'
+import { postAdded, postAddedd } from '@/redux/reducers/posts/postsSlice'
 
 export const AddPostForm = () => {
     const dispatch = useDispatch()
@@ -14,11 +14,14 @@ export const AddPostForm = () => {
     //save
     const save = () => {
         if (title && content) {
-            dispatch(postAdded({
-                id: nanoid(),
-                title,
-                content
-            }))
+            // redux 第一种写法
+            // dispatch(postAdded({
+            //     id: nanoid(),
+            //     title,
+            //     content
+            // }))
+            // redux 第一种写法
+            dispatch(postAddedd(title, content))
             setTitle('')
             setContent('')
         } else {
@@ -27,7 +30,7 @@ export const AddPostForm = () => {
     }
     return (
         <section>
-            <h2>添加新帖子</h2>
+            <h2>redux 增删改查</h2>
             <form>
                 <label htmlFor="postTitle">帖子标题:</label>
                 <input

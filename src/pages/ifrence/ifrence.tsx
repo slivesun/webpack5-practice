@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react'
 import { useSetState } from 'ahooks'
-import { Carousel, Collapse } from 'antd'
+import { Button, Carousel, Collapse } from 'antd'
+import { useDispatch, useSelector } from 'react-redux';
+import { increment } from '@/redux/reducers/counter'
 const { Panel } = Collapse;
 interface State { }
 const Page = () => {
+    const cunt = useSelector((state: any) => state.counter)
+    console.log(cunt,'cuntcuntcunt')
+    const dispatch = useDispatch();
     const [state, setState] = useSetState<State>({
 
     })
@@ -28,6 +33,14 @@ const Page = () => {
     return (
         <div className='' >
             财务报表
+            <div>
+                {cunt.value}
+                <Button
+                    onClick={() => {
+                        dispatch(increment())
+                    }}
+                >+1</Button>
+            </div>
             <div>
                 <Carousel autoplay>
                     <div>
