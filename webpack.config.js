@@ -1,5 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
+
+
+//这样引进是错误的，webpack不允许，因为这个是异步引入，require是同步,只有引入执行完才能往下执行，webpack需要逐步执行才能打包所以只能用
+// module.exports 和 require 配合使用
+// import DevConfig from '@/webpack_config/dev.config';
+const DevConfig = require('./webpack_config/dev.config');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const WebpackBar = require('webpackbar')
@@ -9,6 +16,11 @@ const stylesHandler = MiniCssExtractPlugin.loader;
 // const friendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');//命令友好提示
 // 尝试使用环境变量，否则使用根路径
 const ASSET_PATH = process.env.ASSET_PATH || '/';
+
+
+
+
+
 
 module.exports = (env) => { //env----package.json 中带的变量，有插件可以代替
     console.log(env, '---------------------evn')
@@ -82,7 +94,7 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
                                 lessOptions: {
                                     javascriptEnabled: true,
                                     sourceMap: true,
-                                    modifyVars: {//配置antd主题
+                                    modifyVars: { //配置antd主题
                                         'primary-color': '#F3822A', //主题色
                                         'border-radius-base': '3px', //组件/浮层圆角圆角
                                         'font-size-base': '14px', // 主字号
@@ -188,18 +200,12 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
         ],
         devServer: {
             static: false, //'./dist',//该配置项允许配置从目录提供静态文件的选项（默认是 'public' 文件夹）。将其设置为 false 以禁用
-            host: '0.0.0.0', //所有外部服务（局域网）可以访问自己，但是设置这个后自动打开的话会访问不对，有bug
-            port: '6001', //启动端口
+            host: DevConfig.host, //所有外部服务（局域网）可以访问自己，但是设置这个后自动打开的话会访问不对，有bug
+            port: DevConfig.port, //启动端口
             hot: true, //热模块替换更新 
             open: false, //是否自动打开浏览器
             compress: true, //启用gzip,打包压缩
-            proxy: [{
-                context: ['/api', '/sk-ep'],
-                target: 'http://localhost:3000',
-                pathRewrite: 1 ? { //重写默认路径
-                    '^/api': ''
-                } : null,
-            }, ],
+            proxy: DevConfig.proxy,
             client: {
                 progress: true, //浏览器显示打包百分比
                 // overlay: false, //报错信息是否显示在屏幕
