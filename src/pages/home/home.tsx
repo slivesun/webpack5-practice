@@ -1,9 +1,22 @@
 
 import { Badge, Card } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
+import Axios from 'axios';
 const Home = () => {
+    useEffect(() => {
+        getData()
+    }, [])
+    const getData = () => {
+        Axios.get('/api/sinzetech-storage/inStockEntries/web?current=1&size=10').then((res) => {
+            if (res.data.code == 0) {
+
+            } else {
+
+            }
+        })
+    }
     return (
-        <div className='home' style={{padding:'10px'}}>
+        <div className='home' style={{ padding: '10px' }}>
             home
             <>
                 <Badge.Ribbon text="Hippies">

@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 //这样引进是错误的，webpack不允许，因为这个是异步引入，require是同步,只有引入执行完才能往下执行，webpack需要逐步执行才能打包所以只能用
 // module.exports 和 require 配合使用
-// import DevConfig from '@/webpack_config/dev.config';
+// import DevConfig from './webpack_config/dev.config';
 const DevConfig = require('./webpack_config/dev.config');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -205,7 +205,37 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             hot: true, //热模块替换更新 
             open: false, //是否自动打开浏览器
             compress: true, //启用gzip,打包压缩
-            proxy: DevConfig.proxy,
+            // proxy: {
+            //     "/api": "http://localhost:3000"
+            // },
+            // proxy: {
+            //     '/api': {
+            //         target: '<url>',
+            //         ws: true,
+            //         changeOrigin: true
+            //     },
+            //     '/foo': {
+            //         target: '<other_url>'
+            //     }
+            // },
+            proxy: DevConfig.proxy.map(item => ({
+                context: item.context, //多个特定路径代理到统一目标
+                target: item.target, //被代理到的目标地址
+                secure: false, // false 为 接受运行在https上，且接受使用了无效证书的后端服务器
+                changeOrigin: true, //将 host 设置为 target 地址 前端看不出区别，需要后端request.getHeader("Host") 打印
+                pathRewrite: item.isDevelop ? { //如果不想始终传递/api，可以重写路径
+                    '^/api': ''
+                } : null,
+                // bypass: function (req, res, proxyOptions) {
+                //     // 有时你不想代理所有的请求。 可以基于一个函数的返回值绕过代理。
+                //     // 在函数中你可以访问请求体、 响应体和代理选项。 必须返回false或路径， 来跳过代理请求。
+                //     // 例如： 对于浏览器请求， 你想要提供一个HTML页面， 但是对于API请求则保持代理。 你可以这样做：
+                //     if (req.headers.accept.indexOf("html") !== -1) {
+                //         console.log("Skipping proxy for browser request.");
+                //         return "/index.html";
+                //     }
+                // }
+            })),
             client: {
                 progress: true, //浏览器显示打包百分比
                 // overlay: false, //报错信息是否显示在屏幕

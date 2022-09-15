@@ -6,6 +6,7 @@ import { createRoot } from 'react-dom/client';
 import store from './redux/index';
 import { Provider } from 'react-redux';//redux 状态包裹 根组件，传递 store 状态
 import zhCN from 'antd/es/locale/zh_CN';//antd 中文
+import '@/api';//引入 axios 
 import "antd/dist/antd.less";
 import '@/public/css/scroll.style.scss'
 const container: any = document.getElementById('root');//获取根元素
