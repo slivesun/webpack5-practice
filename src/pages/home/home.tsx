@@ -1,5 +1,5 @@
 
-import { Badge, Card } from 'antd';
+import { Badge, Card, message } from 'antd';
 import React, { useEffect } from 'react';
 import Axios from 'axios';
 const Home = () => {
@@ -11,7 +11,7 @@ const Home = () => {
             if (res.data.code == 0) {
 
             } else {
-
+                message.error('错了')
             }
         })
     }
