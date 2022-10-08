@@ -26,6 +26,42 @@ const muenuList: any[] = [
                 key: '/list',
                 icon: React.createElement(VideoCameraOutlined),
                 label: `nav 列表页`,
+                children: [
+                    {
+                        key: '/list/order',
+                        icon: React.createElement(VideoCameraOutlined),
+                        label: `l列表页e`,
+                        children: [
+                            {
+                                key: '/list/order/lj',
+                                icon: React.createElement(VideoCameraOutlined),
+                                label: `le-理解`,
+                            },
+                            {
+                                key: '/list/redux/dd',
+                                icon: React.createElement(VideoCameraOutlined),
+                                label: `le-嘀嗒`,
+                            }
+                        ],
+                    },
+                    {
+                        key: '/list/redux',
+                        icon: React.createElement(VideoCameraOutlined),
+                        label: `w列表页r`,
+                        children: [
+                            {
+                                key: '/list/redux/rt',
+                                icon: React.createElement(VideoCameraOutlined),
+                                label: `wr-认同`,
+                            },
+                            {
+                                key: '/list/redux/uy',
+                                icon: React.createElement(VideoCameraOutlined),
+                                label: `wr-㕛`,
+                            }
+                        ],
+                    }
+                ],
             },
             {
                 key: '/sys',
