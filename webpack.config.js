@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const { name } = require("./package");
 
 
 //这样引进是错误的，webpack不允许，因为这个是异步引入，require是同步,只有引入执行完才能往下执行，webpack需要逐步执行才能打包所以只能用
@@ -43,7 +44,8 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
         },
         // 'source-map' : 'cheap-module-source-map'
         // devtool: env.mode == 'development' ? 'inline-source-map' : 'source-map', //控制台打印报错，生产环境不要用属于开发工具,会生成js.map文件
-        devtool: 'cheap-module-source-map', //控制台打印报错，生产环境不要用属于开发工具,会生成js.map文件
+        devtool: env.mode == 'development' ? 'source-map' : 'cheap-module-source-map', //控制台打印报错，生产环境不要用属于开发工具,会生成js.map文件
+        // devtool: 'cheap-module-source-map', //控制台打印报错，生产环境不要用属于开发工具,会生成js.map文件
         output: {
             // filename: 'bundle.js',
             // filename: '[name][fullhash].bundle.js', //js打包名称
@@ -187,7 +189,7 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             }), //压缩css
             // new webpack.HotModuleReplacementPlugin(),//r热更新插件
             // env.analz ? new BundleAnalyzerPlugin() : null, //代码分析插件
-            // new WebpackBar(), //打包进度条插件
+            new WebpackBar(), //打包进度条插件
             // new WorkboxPlugin.GenerateSW({//渐进式网络应用程序 在**离线(offline)**时应用程序能够继续运行功能
             //     // 这些选项帮助快速启用 ServiceWorkers
             //     // 不允许遗留任何“旧的” ServiceWorkers
@@ -254,15 +256,49 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             runtimeChunk: 'single',
             usedExports: true,
             moduleIds: 'deterministic', //保证splitChunks-cacheGroups拆分出的文件hash名称不变提升打包速度
-            splitChunks: { //分离各种文件作用：将不长变更的依赖包抽离打包，将经常改的业务文件单独打包，打包时共用文件只需打包一份速度会有质的提高
-                cacheGroups: {
-                    vendor: {
-                        test: /[\\/]node_modules[\\/]/,
-                        name: 'vendors',
-                        chunks: 'all',
-                    },
-                },
+            // splitChunks: { //分离各种文件作用：将不长变更的依赖包抽离打包，将经常改的业务文件单独打包，打包时共用文件只需打包一份速度会有质的提高
+            //     cacheGroups: {
+            //         vendor: {
+            //             test: /[\\/]node_modules[\\/]/,
+            //             name: 'vendors',
+            //             chunks: 'all',
+            //         },
+            //     },
+            //     chunks: 'all',
+            // },
+            splitChunks: {
                 chunks: 'all',
+                cacheGroups: {
+                    rcRelevant: {
+                        name: 'rc-relevant',
+                        test: /[\\/]node_modules[\\/](@ant-design|rc-table|rc-picker|rc-select|rc-util|rc-menu|rc-tree|rc-pagination|rc-image|rc-virtual-list|rc-textarea|rc-trigger)[\\/]/,
+                        chunks: 'all',
+                        priority: 4,
+                    },
+                    antd: {
+                        name: 'antd',
+                        test: /[\\/]node_modules[\\/]antd[\\/]/,
+                        chunks: 'all',
+                        priority: 3,
+                    },
+                    vendor: {
+                        name: 'vendor',
+                        priority: 2,
+                        test: /node_modules/,
+                        // test: /[\\/]node_modules[\\/](react|react-dom|moment|react-document-title|bind-decorator)[\\/]/,
+                        chunks: 'all',
+                        minSize: 0,
+                        minChunks: 2,
+                    },
+                    common: {
+                        name: 'common',
+                        priority: 1,
+                        test: /src/,
+                        chunks: 'all',
+                        minSize: 0,
+                        minChunks: 2,
+                    },
+                }
             },
         },
 

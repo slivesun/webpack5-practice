@@ -18,5 +18,7 @@
           "src/*"
         ],
       },
+      // "declaration": true, // 是否自动创建类型声明文件
+      "removeComments": true, // 是否移除注释
     }
 }
