@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const { name } = require("./package");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 
 //这样引进是错误的，webpack不允许，因为这个是异步引入，require是同步,只有引入执行完才能往下执行，webpack需要逐步执行才能打包所以只能用
@@ -77,9 +78,9 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
                     test: /\.s[ac]ss$/i,
                     use: [stylesHandler, "css-loader", "postcss-loader", "sass-loader"],
                     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
-                    // generator: {
-                    //     filename: 'css/[hash][ext][query]', //资源文件打包路径
-                    // }
+                    generator: {
+                        filename: 'css/[hash][ext][query]', //资源文件打包路径
+                    }
                 },
                 {
                     test: /\.less$/i,
@@ -114,19 +115,19 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
                                 }
                             }
                         }
-                    ]
+                    ],
                     // include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
-                    // generator: {
-                    //     filename: 'css/[hash][ext][query]', //资源文件打包路径
-                    // }
+                    generator: {
+                        filename: 'css/[hash][ext][query]', //资源文件打包路径
+                    }
                 },
                 {
                     test: /\.css$/i,
                     use: [stylesHandler, "css-loader", "postcss-loader"],
                     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
-                    // generator: {
-                    //     filename: 'css/[hash][ext][query]', //资源文件打包路径
-                    // }
+                    generator: {
+                        filename: 'css/[hash][ext][query]', //资源文件打包路径
+                    }
                 },
                 {
                     test: /\.(ts|tsx)?$/, // .ts或者tsx后缀的文件，就是typescript文件
@@ -199,6 +200,7 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             // new webpack.DefinePlugin({// 这可以帮助我们在代码中安全地使用环境变量
             //     'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH),
             // }),
+            new CleanWebpackPlugin(),
         ],
         devServer: {
             static: false, //'./dist',//该配置项允许配置从目录提供静态文件的选项（默认是 'public' 文件夹）。将其设置为 false 以禁用
