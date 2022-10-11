@@ -1,7 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
-const { name } = require("./package");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {
+    name
+} = require("./package");
+const {
+    CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 
 
 //这样引进是错误的，webpack不允许，因为这个是异步引入，require是同步,只有引入执行完才能往下执行，webpack需要逐步执行才能打包所以只能用
@@ -65,6 +69,11 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
         },
         module: {
             rules: [
+                {
+                    test: /\.(ts|tsx)?$/, // .ts或者tsx后缀的文件，就是typescript文件
+                    use: 'ts-loader', // 就是上面安装的ts-loader
+                    exclude: ['/node_modules/'], // 排除node-modules目录
+                },
                 // {
                 //     test: /\.css$/i,
                 //     type: 'asset/resource',
@@ -129,19 +138,35 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
                         filename: 'css/[hash][ext][query]', //资源文件打包路径
                     }
                 },
-                {
-                    test: /\.(ts|tsx)?$/, // .ts或者tsx后缀的文件，就是typescript文件
-                    use: 'ts-loader', // 就是上面安装的ts-loader
-                    exclude: ['/node_modules/'], // 排除node-modules目录
-                },
-                {
-                    test: /\.(png|svg|jpg|jpeg|gif|svg|woff|woff2|eot|ttf|otf)$/i,
-                    type: 'asset/resource',
-                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
-                    generator: {
-                        filename: 'image/[hash][ext][query]', //资源文件打包路径
-                    }
-                },
+                
+                // {
+                //     // test: /\.(png|svg|jpg|jpeg|gif|svg)$/i,
+                //     // type: 'javascript/auto',
+                //     // include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                //     // exclude: ['/node_modules/'], // 排除node-modules目录
+                //     // generator: {
+                //     //     filename: 'image/[hash][ext][query]', //资源文件打包路径
+                //     // },
+                //     // use: [
+                //     //     {
+                //     //         loader: 'url-loader',
+                //     //         options: {
+                //     //             esModule: false,//file-loader在5.0版本更新中默认为了true，所以显示 [object Module]
+                //     //             limit: 0,//多大需要压缩
+                //     //             // name: '[name].[ext]',
+                //     //             name: 'image/[name].[hash:8].[ext]'
+                //     //         }
+                //     //     }
+                //     // ]
+                // },
+                // {
+                //     test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                //     type: 'asset/source',
+                //     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                //     generator: {
+                //         filename: 'font/[hash][ext][query]', //资源文件打包路径
+                //     },
+                // },
                 // {//没搞成
                 //     test: /\.svg$/i,
                 //     type: 'asset/inline',
