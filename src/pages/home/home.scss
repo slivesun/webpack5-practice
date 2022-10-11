@@ -1,4 +1,21 @@
+@font-face {
+    font-family: 'Myfont';
+    src: url('../../assets/MilkyCoffee.otf') format('opentype'),
+        url('../../assets/MilkyCoffee.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Myfont2';
+    src: url('../../assets/lovecraft.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Myfont3';
+    src: url('../../assets/my-font.ttf') format('opentype');
+}
+
 .home {
+
     // background-color: aqua;
     height: 100%;
     display: flex;
@@ -9,9 +26,19 @@
         background-color: #fff;
         padding: 10px;
         margin-bottom: 10px;
-        background-image: url('./image/icon.png');
+        background-image: url('./image/rrw.png');
+
         .btn {
             margin-right: 10px;
+        }
+        .btn1{
+            font-family: 'Myfont2' !important;
+        }
+        .btn2{
+            font-family: 'Myfont2' !important;
+        }
+        .btn3{
+            font-family: 'Myfont3' !important;
         }
     }
 

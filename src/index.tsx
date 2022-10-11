@@ -1,4 +1,4 @@
-import { BrowserRouter, } from 'react-router-dom';
+import { BrowserRouter,HashRouter } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import React from 'react';
 import RoterA from './router/router';

@@ -9,7 +9,7 @@ const Home = () => {
     let [isModal, setIsModal] = useState<boolean>(false)
     let [isLoading, setIsLoading] = useState<boolean>(false)
     useEffect(() => {
-        getData()
+        // getData()
     }, [])
     const getData = () => {
         setIsLoading(true)
@@ -35,28 +35,28 @@ const Home = () => {
                 <h2>用户列表</h2>
                 <div>
                     <Button
-                        className='btn'
+                        className='btn btn1'
                         type='primary'
                         onClick={() => {
                             setIsModal(true)
                         }}
                     >新增</Button>
                     <Button
-                        className='btn'
+                        className='btn btn2'
                         type='primary'
                         onClick={() => {
                             getData()
                         }}
                     >查询</Button>
                     <Button
-                        className='btn'
+                        className='btn btn3'
                         type='primary'
                         onClick={() => {
                             Axios.get('/test.jpg').then((res: any) => {
 
                             })
                         }}
-                    >查看图片</Button>
+                    >查看图片 imgSdll dllja</Button>
                 </div>
             </div>
             <div className='bottom'>

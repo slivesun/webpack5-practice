@@ -59,7 +59,7 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
             path: path.resolve(__dirname, 'dist'), //输出文件名称
             clean: true, //清除打包文件重新打包
             // publicPath: '/', //公共路径
-            publicPath: ASSET_PATH, //公共路径
+            publicPath: '/', //公共路径
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'], // 配置ts文件可以作为模块加载
@@ -139,34 +139,35 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
                     }
                 },
                 
-                // {
-                //     // test: /\.(png|svg|jpg|jpeg|gif|svg)$/i,
-                //     // type: 'javascript/auto',
-                //     // include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
-                //     // exclude: ['/node_modules/'], // 排除node-modules目录
-                //     // generator: {
-                //     //     filename: 'image/[hash][ext][query]', //资源文件打包路径
-                //     // },
-                //     // use: [
-                //     //     {
-                //     //         loader: 'url-loader',
-                //     //         options: {
-                //     //             esModule: false,//file-loader在5.0版本更新中默认为了true，所以显示 [object Module]
-                //     //             limit: 0,//多大需要压缩
-                //     //             // name: '[name].[ext]',
-                //     //             name: 'image/[name].[hash:8].[ext]'
-                //     //         }
-                //     //     }
-                //     // ]
-                // },
-                // {
-                //     test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                //     type: 'asset/source',
-                //     include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
-                //     generator: {
-                //         filename: 'font/[hash][ext][query]', //资源文件打包路径
-                //     },
-                // },
+                {
+                    test: /\.(png|svg|jpg|jpeg|gif|svg)$/i,
+                    type: 'asset/source',
+                    // type: 'javascript/auto',
+                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                    // exclude: ['/node_modules/'], // 排除node-modules目录
+                    generator: {
+                        filename: 'image/[hash][ext][query]', //资源文件打包路径
+                    },
+                    // use: [
+                    //     {
+                    //         loader: 'url-loader',
+                    //         options: {
+                    //             esModule: false,//file-loader在5.0版本更新中默认为了true，所以显示 [object Module]
+                    //             limit: 0,//多大需要压缩
+                    //             // name: '[name].[ext]',
+                    //             name: 'image/[name].[hash:8].[ext]'
+                    //         }
+                    //     }
+                    // ]
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                    type: 'asset/source',
+                    include: path.resolve(__dirname, 'src'), //性能优化，将loader 只应用在src中
+                    generator: {
+                        filename: 'font/[hash][ext][query]', //资源文件打包路径
+                    },
+                },
                 // {//没搞成
                 //     test: /\.svg$/i,
                 //     type: 'asset/inline',
@@ -273,11 +274,11 @@ module.exports = (env) => { //env----package.json 中带的变量，有插件可
                     errors: true
                 }, //报错信息是否显示在屏幕
             },
-            // historyApiFallback: {//和以及 output.publicPath 解决 history 模式页面刷新后出现 404 的情况。
-            //     disableDotRule: true
-            // }
+            historyApiFallback: {//和以及 output.publicPath 解决 history 模式页面刷新后出现 404 的情况。
+                disableDotRule: true
+            },
             // inline: true, //缺少该配置，会出现上面的错误
-            historyApiFallback: true //缺少该配置，会出现上面的错误
+            // historyApiFallback: true //缺少该配置，会出现上面的错误
         },
         optimization: {
             runtimeChunk: 'single',
